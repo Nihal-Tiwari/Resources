@@ -19,3 +19,6 @@ https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.
 https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
 ### apktool2
 https://bitbucket.org/iBotPeaches/apktool/downloads/
+
+### Firebase
+git clone https://github.com/shivsahni/FireBaseScanner
