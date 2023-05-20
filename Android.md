@@ -22,3 +22,6 @@ https://bitbucket.org/iBotPeaches/apktool/downloads/
 
 ### Firebase
 git clone https://github.com/shivsahni/FireBaseScanner
+
+### MobSf
+https://github.com/MobSF/Mobile-Security-Framework-MobSF/wiki/1.-documentation 
