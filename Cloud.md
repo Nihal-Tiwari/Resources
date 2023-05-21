@@ -8,4 +8,6 @@ sudo apt update && sudo apt install terraform
 
 
 echo $PATH
+
+
 mv ~/Downloads/terraform /usr/local/bin/
