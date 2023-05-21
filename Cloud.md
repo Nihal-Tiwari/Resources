@@ -11,3 +11,6 @@ echo $PATH
 
 
 mv ~/Downloads/terraform /usr/local/bin/
+
+### Terra download
+https://releases.hashicorp.com/terraform/1.4.6/terraform_1.4.6_linux_amd64.zip
