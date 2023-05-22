@@ -25,3 +25,12 @@ git clone https://github.com/shivsahni/FireBaseScanner
 
 ### MobSf
 https://github.com/MobSF/Mobile-Security-Framework-MobSF/wiki/1.-documentation 
+
+### QARK
+https://github.com/linkedin/qark
+
+### Wbruter
+https://github.com/wuseman/WBRUTER
+
+### MARA Framework
+https://github.com/xtiankisutsa/MARA_Framework
