@@ -11,3 +11,11 @@
 ### wappalyzer
 
 ### whatweb
+
+### SMB Tools
+
+enum4linux
+
+smbclient
+
+smbmap
