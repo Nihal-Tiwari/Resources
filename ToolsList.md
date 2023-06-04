@@ -19,3 +19,5 @@ enum4linux
 smbclient
 
 smbmap
+
+#### FoxyProxy
