@@ -1,14 +1,24 @@
-### Burp Suite
+#### Burp Suite
 
-### OWASP ZAP
+#### OWASP ZAP
 
-### Nessus
+#### Wireshark
+
+##### Nessus
 
 ### Whois lookup
 
-### nslookup
+#### nslookup
 
-### wappalyzer
+#### Built With Extension
+
+#### dig
+
+#### TraceRoute
+
+#### 
+
+### wappalyzer Extension
 
 ### whatweb
 
@@ -20,4 +30,6 @@ smbclient
 
 smbmap
 
-#### FoxyProxy
+#### FoxyProxy Extension
+
+#### WayBack Machine
