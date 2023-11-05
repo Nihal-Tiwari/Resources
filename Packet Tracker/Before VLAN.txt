@@ -1,0 +1,42 @@
+SELECT ONE ROUTER AND PC-PT
+USE CONSOLE CABLE 
+
+connect RS 232 port of PC and console port of router
+
+
+CONFIGURE ROUTER FROM PC
+
+click the PC ad open terminal press OK terminal opens
+en
+conf t
+hostname R1
+enable secret cisco
+line console 0   --- 0 is the number of the port
+password ccna
+end
+exit
+
+en
+enter password cisco
+conf t
+line con 0
+login   --- to tell the router that the password must be used
+end
+exit
+
+now enter password ccna
+en
+enter pass cisco
+sh run   --- you will see line con isn't encrypted 
+
+
+
+Enable password encryption ||
+
+conf t
+service password-encryption
+do sh run
+
+save
+
+copy run start

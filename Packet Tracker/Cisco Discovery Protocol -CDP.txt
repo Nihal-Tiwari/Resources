@@ -1,0 +1,79 @@
+Cisco Discovery Protocol - it is used to share information about other directly connected cisco equipment such as OS version
+
+Step 1 -
+switch 1 should have 1 neighbour R1
+R1 should have 2 neighbours R2 and S2
+
+SWITCH 1
+en
+sh cdp neighbours
+device ID is te neighbour 
+local interface is the interface of the machine on which it is coneected
+Platform is the model of the neighbour device
+Port ID is the interface of the remote device - R1
+
+
+ROUTER 1
+en
+sh cdp neighbour
+
+ROUTER 2
+en
+sh cdp neighbour
+
+SWITCH 2
+en
+sh cdp neighbour
+
+
+STEP 2 - DCE : Data communications equipments & DTE : Data terminating Equipment 
+
+DCE provides clock rate of the connection
+
+ROUTER 1
+en
+sh controllers s2/0
+R1 is DCE sideof the connection
+
+set clockrate to 64 kilobites per second
+conf t
+int s2/0
+clock rate 64000
+
+
+STEP 3 
+
+ROUTER 1
+end 
+sh cdp int
+conf t
+cdp run = to enable CDP
+no cdp run = disable cdp 
+do sh cdp neigh
+cdp run
+do sh cdp neigh = this time no neighbours appear bcox cdp send time is 60 seconds by default 
+wait a min and enter the command again 
+
+
+STEP 6 
+
+bcoz cdp sends infroamtion it is a good practice to disable it on devices 
+
+SWITCH 1
+en conf t
+int range f0/3 - 4  = We don't want to disable CDP globally so we'll not use no cdp run, configure both interfaces at same time
+cdp enable 
+no cdp enable 
+do sh run == to verify
+
+SWITCH 2
+conf t 
+int range f0/3 - 4
+no cdp enable 
+do sh run == to verify
+
+
+show version == to see the version of the 
+
+sh cdp neigh detail
+sh cdp entry R1 == to see details of a particular device

@@ -1,0 +1,36 @@
+configure VLANs
+
+en
+conf t
+int f0/2
+switchport mode access  (SWITCH PORTS ARE IN ACCESS MODE BY DEFAULT)
+switchport ac vlan 1
+int f0/3
+switch mode ac
+switch ac vlan 2
+do sh run
+we can see switchport mode access command on both interfaces but why don't we see the access vlan 1 we only see 2
+this is because of something called as native vlan, in normal vlan the switch tags the packet from that vlan to identify it as belonging to that vlan.
+The navtive vlan how ever doesn't need to be tagged and any packets that are untagged are assumed to belong to that vlan. and vlan 1 is the default native vlan on cisco switches because of this by default all interfaces belong to vlan 1. if you try to explicilty configure an interface as vlan 1 it won't even show up in the configuraiton. the native vlan can be changed. for security purposes we ususally change it.
+
+Switch 2
+en
+conf t
+int f0/2
+switchport mode access
+swithcport ac vlan 1
+int f0/3
+switchport ac vlan 2
+do sh run
+
+
+No ping only 1 and 3 can ping bcoz we have configured vlan 1 
+SW1 & SW2 are assigned to VLAN 1 so only traffic from VLAN 1 can pass through them
+
+configure interfaces of sw1 and 2 as trunk interfaces to allow traffic from multiple VLANS to pass between 2 switches we must configure their fast ethernet 0/1 interfaces as trunk int
+
+Last step
+en
+conf t
+int f0/1
+switchport mode trunk - both switches

@@ -1,0 +1,8 @@
+IPv6 routing
+
+conf t 
+ipv6 unicast-routing
+int g0/0
+no shutdown
+ipv6 address 2001:db8:1:1::1/64
+do sh run

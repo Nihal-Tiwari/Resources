@@ -1,0 +1,77 @@
+add 2811 router
+add 2960 switch
+2 IP PHONES 2 PCS
+
+Connect them with auto  cable
+
+Configure switch
+
+en 
+conf t
+vlan 10
+name DATA
+vlan 50
+name voice
+ex
+
+int range fa0/2-3
+swithport mode access 
+switchport access vlan 10
+swithcprot voice vlan 50
+ex
+
+int fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 1,10,50
+ex
+do wr
+do sh start
+(you should see swithcport turnk allowed vlan 1,10,50)
+
+config Router
+
+Go to Config tab and click on FastEthernet0/0 and turn on on the left top side
+ex
+service dhcp
+ip dhcp pool DATA
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+ex
+
+ip dhcp pool VOICE
+network 192.168.2.0 255.255.255.0
+default-router 192.168.2.1
+option 150 ip 192.168.2.1
+ex
+
+int fa0/0.10
+encapsulation Dot1q 10
+ip address 192.168.1.1 255.255.255.0
+ex
+
+int fa0/0.50
+encapsulation Dot1q 50
+ip address 192.168.2.1 255.255.255.0
+ex
+do wr
+
+go to both PCs and config tab and change gateway to DHCP
+
+Config router
+
+telephony-service
+max-dn 2
+max-ephones 2
+ip source-address 192.168.2.1 port 2000
+auto assign 1 to 2
+
+
+ephone-dn 1
+number 2001
+ex
+
+ephone-dn 2
+number 2002
+ex
+
+switch on the phone and it's connected

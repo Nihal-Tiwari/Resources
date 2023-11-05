@@ -1,0 +1,37 @@
+Ping PC1 <-> PC 2 - WORKS
+PC 1 TO 3 - WORKS
+
+STEP 2 
+
+SW 1
+en
+conf t
+int f0/3
+switch mode ac
+switch ac vlan 2
+
+SW2
+en
+conf t
+int f0/2
+switch mode ac
+switch ac vlan 2
+
+STEP 3
+
+Remember that by default SWITCH PORTS are access ports in native vlan that is vlan 1
+in order for switches to carry traffic form vlan 2 as well so that PC2 & PC 3 can communicate with each other we need to create a trunk
+
+SW1
+int f0/1
+switchport mode trunk
+if only one type of encapsulation is available it works but if it has multiple types of encapsulation available
+so we need to configure which type of encapsulation to use
+
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+SW2
+int f0/1
+switch trunk encap dot1q
+switch mode trunk

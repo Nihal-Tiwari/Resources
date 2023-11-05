@@ -1,0 +1,73 @@
+change the hostname of router
+? for commands
+enable
+configure
+hostname R1
+host R1
+
+Switch
+add power supply
+en
+conf t
+host S1
+
+end
+
+
+Show IP address
+show IP interface brief
+
+
+R1
+en
+conf t
+interface gigabitEthernet 0/0/0
+no shutdown 
+end
+show ip int brief
+int g0/0/0
+ip add
+ip address 192.168.1.1 255.255.255.0      //    for R2 192.168.1.1 255...
+
+save it
+copy running-config startup-config
+wr
+
+
+enable password ||
+conf t
+enable password cisco
+
+show running-config
+sh run
+
+Enable passwrod encryption  ||
+conf t
+service password-encryption    -- 7 is the type of encryption
+
+do sh run from global conf mode to run the command in global conf mode
+
+
+Disable pass encryption  ||
+no service password-encryption
+
+
+enable secret ccna -- encrypts the password ccna by default now the enable password is useless --5 is the type of encryption
+
+service password-encryption
+now check the encruption types by sh run
+
+
+
+sh startup config   --- to check the startup config
+
+copy running-config startup-config == copy the runningconfig to startup config
+
+now run startup config to see the confiuration
+
+wr or write also saves the config
+
+
+
+reload
+to reload and verify the changes saved

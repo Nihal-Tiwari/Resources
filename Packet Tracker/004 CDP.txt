@@ -1,0 +1,25 @@
+en
+show cdp neighbours
+
+Physical layer check - is the cable plugged? yes
+is the interface turned on?
+
+sh ip int br
+ser0 is down
+
+
+[DO IT ON BOTH ROUTERS]
+conf t
+int serial 0
+no shutdown
+
+sh cdp neigh
+
+DCE is the equipment that sets up and manages the connection, while DTE is the equipment that uses the connection to send and receive data. They work together to enable communication over a serial interface
+
+sh controllers serial 0
+
+conf t
+int serial 0
+clock rate 64000
+

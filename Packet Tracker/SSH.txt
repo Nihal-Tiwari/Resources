@@ -1,0 +1,77 @@
+SSH
+
+SW1
+en
+conf t
+host SW1
+
+R1
+EN 
+CONFT 
+host r1
+
+int g0/0
+ipa add 192.168.1.1 255.255.255.0
+no shutdown
+
+SW1
+int vlan 1
+ip add 192.168.1.2 255.255.255.0
+no shutdown
+
+STEP 3
+
+SW1
+ex
+username cisco password CCNA
+ 
+R1
+ex
+username cisco password CCNA
+ip domain-name cisco.com
+
+SW1
+ip domain-name cisco.com
+
+STEP 5
+
+SW1
+cryto keygenerate rsa
+1024
+
+R1
+crypto key generate rsa 
+1024
+
+STEP 6
+
+line vty 0 15
+login local
+transprot input ssh == this will allow only ssh to connect not telnet 
+exec-timeout 5
+
+
+SW1
+line vty 0 15
+login local
+transport input ssh
+exec-timeout 5
+exit
+ip ssh version 2
+
+R1
+ex
+ip ssh version 2
+
+
+go to pc 1
+
+telnet 192.168.1.2
+ssh -l cisco 192.168.1.2
+enter password 
+
+exit
+
+ssh -l cisco 192.168.1.1
+enter password 
+exit

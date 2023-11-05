@@ -1,0 +1,51 @@
+telnet
+
+don't end up using it as it sends data in cleartext
+
+STEP 1
+
+SW1
+en conf t
+int vlan 1
+ip add 192.168.1.2 255.255.255.0
+no shutdown 
+
+R1
+en conf t
+int g0/0
+ip add 192.168.1.1 255.255.255.0
+no shutdown 
+
+STEP 2
+
+R1
+exit
+username cisco password CCNA
+
+SW1
+ex
+username cisco password CCNA
+
+
+STEP 3
+
+SW1
+do sh run
+line vty 0 15  == vty is used to connect telnet client
+login local
+transport input telnet == to allow this client to connect 
+
+R1
+line vty 0 15
+login local
+transport input telnet 
+do sh run
+
+go to PC 1
+go to CMD 
+telnet 192.168.1.2
+enter username and password
+exit
+
+telnet 192.168.1.1
+username and password 

@@ -1,0 +1,62 @@
+ROUTER
+en
+enter some password
+
+We will need to reset the router and press CTRL + break
+Go to the physical tab of router and power it off and then power on again. come to CLI and while it's booting press CTRL + C which is the break command 
+
+Now we are in rommon mode >
+confreg 0x2142
+reset
+no
+en
+copy start run
+conf t
+enable secret ccna
+int g0/0
+no shut
+exit
+
+It's important to restore the configuration register to it's default so it doesn't ignore the startup configure when booting up 
+
+config-register 0x2102
+exit
+wr
+ping 192.169.1.100
+copy startup-config tftp
+enter the IP 192.168.1.100
+let the filename be dafault 
+
+
+SERVER -TFTP
+OPEN
+go the services tab
+click TFTP in the left pane and you will see R1-confit file is backed up here
+
+
+ROUTER1
+en
+show version
+you will see C2900
+
+
+TFTP
+in the services TAB
+find the 2900 image on the list 
+click on it and copy it with CTRL + C
+
+
+ROUTER1
+en
+copy tftp flash
+enter the IP : 192.168.1.100
+paste the file name
+show flash
+first let's go with the old name copy it
+delete flash:paste the filename
+show flash -- now we only have 1 flash 
+reload
+en
+enter the password ccna
+sh versin
+you ca nsee the new ios version

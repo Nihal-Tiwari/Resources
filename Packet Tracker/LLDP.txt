@@ -1,0 +1,62 @@
+LLDP (LInk Layer Discovery Protocol) is an open standard protocol. It can be used on devices from any vendors
+
+disable CDP adn enable LLDP STEP 1
+
+SWITCH 1
+en
+conf t
+no dcp run
+lldp run
+ex
+
+ROUTER 1
+EN 
+CONF T
+no cdp run
+lldp run
+ex
+
+ROUTER 2
+en
+conf t
+no cdp run 
+lldp run
+
+SWTICH 2
+en 
+conf t
+no cdp run
+lldp run
+ex
+
+
+SWITCH 1
+sh lldp = find default timer values for LLDP
+sh lldp neigh
+
+
+ROUTER1
+sh lldp neigh
+
+ROUTER 2
+sh lldp neigh
+
+SWITCH 2
+sh lldp neigh
+
+sh lldp niegh detail = IOS version of each neighbouring device 
+
+
+ROUTER2
+sh lldp neigh details
+
+ROUTER 1
+sh lldp neigh details
+
+
+SWITCH 2
+en
+conf t
+int f0/1
+no lldp receive  == to disable lldp reception
+no lldp transmit == turn of lldp transmission
