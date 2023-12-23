@@ -1,0 +1,140 @@
+LAN 2 : /25
+
+Network Address:
+11000000 10101000 00000101 00000000
+  192   . 168    .    5   .   0
+
+Broadcast Address:
+11000000 10101000 00000101 01111111
+   192  .   168  .   5    .   127
+
+2^7-2 = 126 usable addresses
+(/26 = 62 usable addresses = not enough!)
+
+On R1
+en
+conf t
+int g0/1
+ip address 192.168.5.126 255.255.255.128
+no shutdown
+do sh ip int g0/1
+(Bradcast address 255.255.255.255 it will bradcast to local subnet)
+
+PC2
+Config Tab
+Gateway to R1 - 192.168.5.126
+FastEthernet0 - Set IP Address - 192.168.5.1 press tab 255.255.255.128
+
+
+LAN 1: /26
+
+Network Address
+11000000 10101000 00000101 10000000
+  192   .   168  .   5    .  128
+
+Broadcast Address
+11000000 10101000 00000101 10111111
+   192  .  168   .   5    .  191
+
+2^6-2 = 62 usable addresses
+
+R1
+int g0/0
+ip address 192.168.5.190 255.255.255.192
+no shutdown
+
+do sh ip int g0/0
+
+
+PC1
+Config Tab
+Gateway - 192.168.5.190
+click on FastEthernet0 - IP Address - 192.168.5.129 hit tab 255.255.255.192
+
+
+LAN 3:/28
+Netowrk Address:
+11000000 10101000 00000101 11000000
+  192   .   168  .    5   .  192
+
+Broadcast address:
+11000000 10101000 00000101 11001111
+   192  .   168  .   5    . 207
+
+2^4-2 = 14
+
+R2
+int g0/0
+ip address 192.168.5.206 255.255.255.240
+no shutdown
+do sh ip int g0/0
+
+PC3
+Config Tab
+set Gateway - 192.168.5.206
+FastEthernet0 - 192.168.5.193 hit tab 255.255.255.240
+
+
+LAN 4 : /28
+Network Address:
+11000000 10101000 00000101 11010000
+  192   .   168  .    5   .   208
+
+Broadcast Address:
+
+11000000 10101000 00000101 11011111
+   192  .  168   .   5    .   223
+
+2^4-2 = 14 usable addresses
+
+R2
+int g0/1
+ip address 192.158.5.222 255.255.255.240
+no shutdown
+
+do sh ip int g0/1
+
+PC4
+config tab
+Gateway - 192.168.5.222
+FastEthernet0 - IP Address = 192.168.5.209
+255.255.255.240
+
+Last subnet is point to point between r1 & r2
+Point to point : /30 (/31)
+
+Network address:
+11000000 10101000 00000101 11100000
+  192   .   168  .    5   .   224
+
+Broadcast Address:
+11000000 10101000 00000101 11100011
+   192  .   168  .    5   .   227
+
+2^2-2 = 2 usable addresses
+
+
+R1
+int g0/0/0
+ip address 192.168.5.225 255.255.255.252
+no shutdown
+do sh ip int g0/0/0
+
+r2
+int g0/0/0
+ip address 192.168.5.226 255.255.255.252
+no shutdown
+do sh ip int g0/0/0
+exit
+ip route 192.168.5.128 255.255.255.192 192.168.5.225
+ip route 192.168.5.0 255.255.255.128 192.168.5.225
+do sh ip route
+
+
+R1
+ex
+ip route 192.168.5.192 255.255.255.240 192.168.5.226
+ip route 192.168.5.208 255.255.255.240 192.168.5.226
+do sh ip route
+
+ping all the pcs 
