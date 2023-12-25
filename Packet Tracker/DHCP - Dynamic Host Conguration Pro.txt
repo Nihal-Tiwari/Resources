@@ -1,0 +1,65 @@
+DHCP - Dynamic Host Conguration Protocol
+
+We will configure R2 as a DHCP server, R1 as a DHCP
+client on g0/0 interface and also configure R1 as a DHCP
+relay agent
+
+STEP 1
+We will configure 3 DHCP pools on R2, 1 for the 192.168.1.0/24 subnet
+1 for the 192.168.2.0/24 subnet and 
+1 for the connection between R1 & R2
+
+R2
+en 
+conf t
+ip dhcp excluded-address 192.168.1.1 192.168.1.10
+ip dhcp excluded-address 192.168.2.1 192.168.2.10
+
+ip dhcp excluded-address 203.0.113.1
+(the addresses above are reserved and they won't be assigned)
+
+ip dhcp pool POOL1
+network 192.168.1.0 255.255.255.0
+dns-server 8.8.8.8
+domain-name google.com
+default-router 192.168.1.1
+
+ip dhcp pool POOL2
+network 192.168.2.0 255.255.255.0
+dns-server 8.8.8.8
+domain-name google.com
+default-router 192.168.2.1
+
+ip dhcp pool POOL3
+network 203.0.113.0 255.255.255.252
+
+do sh run | section dhcp (| to filter the output)
+
+
+PC2
+ipconfig /renew
+ipconfig /all
+
+Step 2:
+R1
+en
+conf t
+int g0/0
+ip address dhcp
+no shutdown
+(R1 will bradcast a dhcp discover message to R2 which 
+should reply with a dhcp offer, then R1 send will send
+a dhcp request and finally R2 sends sends a DHCP packet which assigns a IP)
+
+
+CONFIGURING R1 AS DHCP RELAY AGENT for 192.168.1.0/24 subnet
+The interface shold be R1's client interface which is PC1
+
+int g0/1
+ip helper-address 203.0.113.1  (address of DHCP server)
+
+
+PC1
+ipconfig /renew (do it a few times if it fails it is similar to arp)
+
+ipconfig /all (it has all the info which we configured on R2 ex domain name,etc)
