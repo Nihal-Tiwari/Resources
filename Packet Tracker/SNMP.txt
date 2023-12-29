@@ -1,0 +1,54 @@
+R1
+en
+conf t
+snmp-server community Cisco1 ro
+snmp-server community Cisco2 rw
+
+PC1
+MIB Browser
+Address: 192.168.1.254
+Click Advanced
+Address: 192.169.1.254
+Port: 161
+Read Community: Cisco1
+Write Community: Cisco2
+SNMP Version: v1
+Hit OK
+
+click MIB Tree
+router_std MIBs
+iso > org > dod > internet > mgmt > mib2 > system
+Click sysUpTime
+At Top Right in Operations
+Get is selected, now click GO
+in the result table
+you will see the OID and its value
+The value is the current uptime of R1 (How long it is been turned on)
+
+Now under system click sysName > Click Go
+This will tell you Hostname
+
+After system click on interfaces
+then .ifNUmber (This will tell you no of interfaces)
+
+Expand .IfTable > .ifEntry
+Click .ifDescr
+(Description of each interface)
+
+.ifType (interface Type)
+
+.ifAdminStatus
+
+
+STEP 3:
+Click GET and GO on .sysName
+Now change operation from GET to Set 
+in the dialogue box
+Data Type: OctetString (You can see the type in resutls table)
+Enter something in the value: R11
+Hit OK then GO 
+(The value has changed)
+
+R1
+Now if you go to R1 and hit enter you will see the hostname has changed to R11
+do sh run | include host
