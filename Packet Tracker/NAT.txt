@@ -1,0 +1,27 @@
+PC1
+CMD
+ping 8.8.8.8 (Fails)
+
+R1
+en
+conf t
+int g0/0
+ip nat outside
+int g0/1
+ip nat inside
+ex
+ip nat inside source static 172.16.0.1 100.0.0.1
+ip nat inside source static 172.16.0.2 100.0.0.2
+ip nat inside source static 172.16.0.3 100.0.0.3
+ex
+sh ip nat translations
+sh ip nat statistics
+
+PC1
+ping 8.8.8.8 (works)
+ping google.com (do it from all PCs)
+
+R1
+sh ip nat translations
+clear ip nat translsation *
+sh ip nat translations
