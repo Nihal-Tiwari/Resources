@@ -1,0 +1,109 @@
+PC1
+Desktop > Web Browser
+url : https://172.16.1.10
+Login
+user: admin
+Pass: Cisco123
+
+SW1 is connected on Port 1 which is green.
+
+in Monitor Tab
+Click Statistics > AP Join
+Click on MAC to see more details
+
+Go to Controller Tab
+Click INterfaces on left
+scroll to top right and click New
+Interface Name: Internal
+vlan id: 100
+clck Apply
+Under Physical Information
+Port Number: 1 (only 1 port was green)
+
+Interface Address
+VLAN Identifier: 100
+IP Address: 10.0.0.10
+Netmask: 255.255.255.0
+Gateway: 10.0.0.1
+
+DHCP Information 
+Primary DHCP Server: 10.0.0.1
+Scrollup and click Apply
+Click OK
+Click Back
+
+Click New
+Interface Name: Guest
+vlan ID: 200
+Click Apply
+
+Under Physical Information
+Port Number: 1
+
+Under Interface Address
+VLAN Identifier: 200
+IP Address: 10.1.0.10
+Netmask: 255.255.255.0
+Gateway: 10.1.0.1
+
+DHCP INformation
+Primary DHCP Server: 10.1.0.1
+
+Scroll up
+Click Apply > OK > BAck
+
+Dynamic Interfaces are created.
+
+Go to WLAN Tab
+Click on Go next to create new
+Type: WLAN
+Profile Name: Internal
+SSID: Internal
+ID: 1
+Apply
+
+in General Tab
+Status: Enabled (check the box)
+INterface/Interface Group: Internal
+
+Security Tab
+Layer 2 Security: WPA+WPA2
+Check WPA2 Policy
+Check WPA2 Encryption AES (check)
+Enable PSK (check)
+PSK Fromat: ASCII
+Pass: Cisco123
+
+Advanced Tab
+Scroll Down
+Maximum allowed Clients: 100
+apply > back
+
+Click Go
+Type: WLAN
+Profile Name: Guest
+SSID: Guest
+ID: 2
+Apply
+
+In General Tab
+Status (check) Enabled
+Interface/Interface Group: Guest
+
+In Security Tab
+Layer 2 Security: WPA+WPA2
+WPA2 Policy: (check) Enable
+WPA2 Encryption: (check) Enable AES
+PSK: (check) Enable
+PSK Format: ASCII
+Pass: Cisco123
+Apply > Back
+
+Drag and add a smartphone
+SMARTPHONE
+Config Tab
+Interface > Wireless0
+SSID: Internal
+Authentication
+WPA2-PSK: PSK Pass Phrase: Cisco123
+It will get an IP address soon
