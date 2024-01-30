@@ -1,0 +1,42 @@
+R1
+en
+conf t
+ip dhcp excluded-address 192.168.1.1 192.168.1.9
+ip dhcp pool POOL1
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1 
+
+SW1
+en
+conf t
+ip dhcp snooping
+ip dhcp snooping vlan 1
+int g0/2
+ip dhcp snooping trust
+ex
+
+SW2
+en
+conf t
+ip dhcp snooping
+ip dhcp snooping vlan 1
+int g0/1
+ip dhcp snooping trust
+
+PC1
+ipconfig /renew (fails)
+(A log msg generated on SW1)
+
+SIMULATION MODE
+run ipconfig /all and observe in simulation mode
+
+(DHCP msg goes to SW2 and then SW1 and then it stops)
+
+SW1
+no ip dhcp snooping information option
+(it is necessary if the SW isn't acting as DHCP relay agent)
+
+SW2
+no ip dhcp snooing information option
+
+run ipconfig /renew on PC

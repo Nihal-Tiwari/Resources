@@ -1,0 +1,52 @@
+R1
+en
+conf t
+ip dhcp excluded-address 192.168.1.1 192.168.1.9
+ip dhcp pool POOL1
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+
+SW1
+en
+conf t
+ip dhcp snooping
+ip dhcp snooping vlan 1
+no ip dhcp snooping information option
+int g0/2
+ip dhcp snooping trust
+ex
+
+SW2
+en
+conf t
+ip dhcp snooping
+ip dhcp snooping vlan 1
+no ip dhcp snooping information option
+int g0/1
+ip dhcp snooping trust
+ex
+ip arp inspection vlan 1
+ip arp inspection validate dst-mac ip src-mac
+int g0/1
+ip arp inspection trust
+end
+sh run
+sh ip arp inspection interfaces
+
+SW1
+ip arp inspection vlan 1
+ip arp inspection validate dst-mac ip src-mac
+int range g0/1 - 2
+ip arp inspection trust
+end
+sh run
+
+PCs
+Config Tab
+Under Gateway/DNS IPv4
+Change from Static to DHCP
+(Do it on all PCs)
+
+ipconfig (they have got IPs)
+Ping R1
+ping 192.168.1.1
